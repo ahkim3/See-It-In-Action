@@ -10,6 +10,6 @@ public:
 	~Blob();
 
 private:
-
+	int size;
 };
 
