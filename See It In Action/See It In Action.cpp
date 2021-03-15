@@ -12,6 +12,7 @@ Signature: Andrew Kim
 
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include <time.h>
 #include "Blob.h"
 
 using namespace std;
@@ -19,6 +20,10 @@ using namespace std;
 
 int main()
 {
+    vector<Blob*> blobs;
+
+    srand(time(NULL));
+
     sf::RenderWindow window(sf::VideoMode(600, 600), "See It In Action");
     
     // Create background shapes
@@ -42,6 +47,10 @@ int main()
     frameRight.setPosition(550, 40);
     frameBottom.setPosition(40, 550);
 
+    // Create 40 blobs
+    for (int i = 0; i < 40; i++)
+        blobs.push_back(new Blob());
+
     while (window.isOpen())
     {
         sf::Event event;
@@ -62,6 +71,10 @@ int main()
         window.draw(frameRight);
         window.draw(frameBottom);
         
+        // Display 40 blobs
+        for (int i = 0; i < 40; i++)
+            window.draw(*blobs.at(i));
+
         window.display();
     }
 

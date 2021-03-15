@@ -9,7 +9,18 @@ public:
 
 	~Blob();
 
+	//void operator+(const Blob&);
+	//bool operator>(const Blob&);
+	//bool operator<(const Blob&);
+	//void operator==(const Blob&);
+
+	//void test();
+
 private:
-	int size;
+	int radius;
+	double velocity;
+	std::vector<float> position;
+
+	void setVelocity();
 };
 
