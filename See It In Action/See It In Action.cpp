@@ -12,6 +12,7 @@ Signature: Andrew Kim
 
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include "Blob.h"
 
 using namespace std;
 
