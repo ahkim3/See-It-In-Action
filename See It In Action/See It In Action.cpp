@@ -1,7 +1,7 @@
 /*
 Name: Andrew Kim
 Date: March 15, 2021
-Program: Rational
+Program: See It In Action
 
 I hereby certify that this program represents my
 work and that the design and logic was completed
@@ -12,6 +12,7 @@ Signature: Andrew Kim
 
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include "Blob.h"
 
 using namespace std;
 

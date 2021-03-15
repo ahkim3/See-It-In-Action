@@ -151,7 +151,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Blob.cpp" />
     <ClCompile Include="See It In Action.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Blob.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
