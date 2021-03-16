@@ -15,7 +15,7 @@ public:
 	bool operator==(const Blob&);
 
 private:
-	int radius, boosts;
+	int boosts;
 	float xPos, yPos, velocity, angle;
 
 	void setVelocity();

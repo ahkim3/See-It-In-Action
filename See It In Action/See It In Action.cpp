@@ -81,7 +81,7 @@ int main()
             // Compare blob with every other blob to check for collision
             for (int j = 0; j < 40; j++)
             {
-                // Ensures pointer exists and that a blob is not comparing itself
+                // Ensure pointer exists and that a blob isn't comparing itself
                 if (blobs.at(i) != NULL && blobs.at(j) != NULL && (i != j))
                 {
                     // Check for collision between blobs

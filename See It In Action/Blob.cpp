@@ -7,22 +7,22 @@
 Blob::Blob()
 {
 	// Randomly generates a radius in the range [10 - 20]
-	radius = rand() % 11 + 10;
+	int radius = rand() % 11 + 10;
+
+	// Boosts count the # of times collisions between same-sized blobs occur
+	boosts = 0;
 
 	// Randomly generate an angle between [0-359 degrees] to initially move
 	angle = (float)(rand() % 360);
 
-	boosts = 0;
+	// Generate random position within coordinates [50 - (500 - diameter)]
+	xPos = (float)(rand() % (500 - (2 * radius))) + 50;
+	yPos = (float)(rand() % (500 - (2 * radius))) + 50;
 
 	setVelocity();
 	setRadius((float)radius);
 	setFillColor(sf::Color(255, 189, 32)); // Amber color
-	
-	// Sets random position within coordinates [50 - (500 - diameter)]
-	xPos = (float)(rand() % (500 - (2 * radius))) + 50;
-	yPos = (float)(rand() % (500 - (2 * radius))) + 50;
 	setPosition(xPos, yPos);
-	
 }
 
 
