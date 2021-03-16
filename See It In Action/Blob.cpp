@@ -52,15 +52,29 @@ Blob& Blob::operator++() // change to void?
 	else if (angle >= 360)
 		angle -= 360;
 
-	setPosition(xPos, yPos); // Set position
+	setPosition(xPos, yPos);
 	
 	return *this;
 }
 
-bool Blob::operator==(const Blob&)
-{
-	//if ()
-	return true;
+bool Blob::operator==(const Blob& other)
+{/*
+	static int count = 0;
+	count++;
+	std::cout << count << std::endl;
+	std::cout << (other.xPos > (xPos - (2 * radius))) << std::endl;
+	std::cout << (other.xPos < xPos + (2 * radius)) << std::endl;
+	std::cout << ((other.yPos > yPos - (2 * radius))) << std::endl;
+	std::cout << (other.yPos < yPos + (2 * radius)) << std::endl << std::endl;
+	*/
+
+	if (((other.xPos >= xPos - (radius)) 
+		&& (other.xPos <= xPos + (radius)))
+		&& ((other.yPos >= yPos - (radius)) 
+		&& (other.yPos <= yPos + (radius))))
+		return true;
+	//std::cout << "false"; //delete later
+	return false;
 }
 
 

@@ -1,6 +1,6 @@
 /*
 Name: Andrew Kim
-Date: March 15, 2021
+Date: March 16, 2021
 Program: See It In Action
 
 I hereby certify that this program represents my
@@ -62,7 +62,6 @@ int main()
                 window.close();
         }
 
-
         // Draw background
         window.clear();
         window.draw(interior);
@@ -73,31 +72,38 @@ int main()
 
         // Draw 40 blobs
         for (int i = 0; i < 40; i++)
-            window.draw(*blobs.at(i));
+            if (blobs.at(i) != NULL) // Ensures pointer exists
+                window.draw(*blobs.at(i));
 
-        // Determine next step
-        // First, loop through each blob
-        for (int i = 0; i < 40; i++)
+        // Determine next frame to draw
+        for (int i = 0; i < 40; i++) // Loop through each blob
         {
             // Compare blob with every other blob to check for collision
             for (int j = 0; j < 40; j++)
             {
-                //if ()
+                // Ensures pointer exists and that a blob is not comparing itself
+                if (blobs.at(i) != NULL && blobs.at(j) != NULL && (i != j))
+                {
+                    // Check for collision between blobs
+                    if (*blobs.at(i) == *blobs.at(j))
+                    {
+                        delete blobs.at(j);
+                        blobs.at(j) = NULL;
+                    }
+                }
             }
 
-            // Compare blob with wall to check for collision
-            //if ()
-
-
             // Step to next position normally
-            ++*blobs.at(i);
+            if (blobs.at(i) != NULL) // Ensures pointer exists
+                ++* blobs.at(i);
         }
         window.display();
     }
 
     // Delete blobs
     for (int i = 0; i < 40; i++)
-        delete blobs.at(i);
+        if (blobs.at(i) != NULL) // Ensures pointer exists
+            delete blobs.at(i);
 
     return 0;
 }
