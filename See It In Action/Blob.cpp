@@ -12,6 +12,8 @@ Blob::Blob()
 	// Randomly generate an angle between [0-359 degrees] to initially move
 	angle = (float)(rand() % 360);
 
+	boosts = 0;
+
 	setVelocity();
 	setRadius((float)radius);
 	setFillColor(sf::Color(255, 189, 32)); // Amber color
@@ -30,7 +32,7 @@ Blob::~Blob()
 }
 
 
-// Determine next step of blob; overloaded prefix increment operator
+// Determines next step of blob
 Blob& Blob::operator++() // change to void?
 {
 	setVelocity();
@@ -39,11 +41,10 @@ Blob& Blob::operator++() // change to void?
 	yPos += (float)cos(angle * 3.1415926 / 180.0) * velocity;
 	xPos += (float)sin(angle * 3.1415926 / 180.0) * velocity;
 
-	//std::cout << angle << " " << (float)cos(angle * 3.1415926 / 180.0) << " " << (float)sin(angle * 3.1415926 / 180.0) << std::endl;
 	// Check for collision with wall
-	if ((yPos >= 550 - 2 * radius) || (yPos <= 50)) // Right/left wall hit
+	if ((yPos >= 550 - 2 * getRadius()) || (yPos <= 50))
 		angle = 180 - angle;
-	else if ((xPos >= 550 - 2 * radius) || (xPos <= 50)) // Top/bottom wall hit
+	else if ((xPos >= 550 - 2 * getRadius()) || (xPos <= 50))
 		angle = 360 - angle;
 
 	// Keep angle within bounds
@@ -57,35 +58,61 @@ Blob& Blob::operator++() // change to void?
 	return *this;
 }
 
-bool Blob::operator==(const Blob& other)
-{/*
-	static int count = 0;
-	count++;
-	std::cout << count << std::endl;
-	std::cout << (other.xPos > (xPos - (2 * radius))) << std::endl;
-	std::cout << (other.xPos < xPos + (2 * radius)) << std::endl;
-	std::cout << ((other.yPos > yPos - (2 * radius))) << std::endl;
-	std::cout << (other.yPos < yPos + (2 * radius)) << std::endl << std::endl;
-	*/
 
-	if (((other.xPos >= xPos - (radius)) 
-		&& (other.xPos <= xPos + (radius)))
-		&& ((other.yPos >= yPos - (radius)) 
-		&& (other.yPos <= yPos + (radius))))
+// Combines two blobs
+void Blob::operator+(Blob& other)
+{
+	// Blobs of the same size bounce off each other and gain 20% velocity boost
+	if (*this == other)
+	{
+		boosts++;
+		velocity *= -1;
+		other.velocity *= -1;
+	}
+	
+	setRadius(sqrt(pow(getRadius(), 2) + pow(other.getRadius(), 2)));
+
+	// Corrects blobs that might go over border after increasing in size
+	if ((xPos > 550 - 2 * getRadius()))
+		xPos = 549 - 2 * getRadius();
+	else if (xPos < 50)
+		xPos = 51; 
+	else if ((yPos > 550 - 2 * getRadius()))
+		yPos = 549 - 2 * getRadius();
+	else if (yPos < 50)
+		yPos = 51;
+
+	setVelocity();
+}
+
+
+// Determines if two blobs have collided and that the other blob is smaller or
+// the same size
+bool Blob::operator&&(const Blob& other)
+{
+	if (((other.xPos >= xPos - (getRadius())) 
+		&& (other.xPos <= xPos + (getRadius())))
+		&& ((other.yPos >= yPos - (getRadius())) 
+		&& (other.yPos <= yPos + (getRadius())))
+		&& other.getRadius() <= getRadius())
 		return true;
-	//std::cout << "false"; //delete later
 	return false;
 }
 
 
-/*
-void Blob::operator+(const Blob&)
+// Determine if two blobs are the same size
+bool Blob::operator==(const Blob& other)
 {
+	if (other.getRadius() == getRadius())
+		return true;
+	return false;
 }
-*/
+
 
 // Sets the velocity of the blob based upon its size
 void Blob::setVelocity()
 {
-	velocity = (float)(0.5 / radius); // Larger blob -> slower velocity
+	// Larger blob results in a slower velocity. Additionally, each boost from
+	// a collision by two blobs of the same size increases total speed by 20%.
+	velocity = (float)((0.4 / getRadius()) * (pow(1.2, boosts)));
 }

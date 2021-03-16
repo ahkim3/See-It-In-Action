@@ -85,10 +85,16 @@ int main()
                 if (blobs.at(i) != NULL && blobs.at(j) != NULL && (i != j))
                 {
                     // Check for collision between blobs
-                    if (*blobs.at(i) == *blobs.at(j))
+                    if (*blobs.at(i) && *blobs.at(j))
                     {
-                        delete blobs.at(j);
-                        blobs.at(j) = NULL;
+                        *blobs.at(i) + *blobs.at(j); // Combine blobs
+
+                        // Delete smaller blob if not the same size
+                        if (!(*blobs.at(i) == *blobs.at(j)))
+                        {
+                            delete blobs.at(j);
+                            blobs.at(j) = NULL;
+                        }
                     }
                 }
             }

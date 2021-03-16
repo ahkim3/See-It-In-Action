@@ -10,13 +10,12 @@ public:
 	~Blob();
 
 	Blob& operator++();
-	//void operator+(const Blob&);
-	//bool operator>(const Blob&);
-	//bool operator<(const Blob&);
+	void operator+(Blob&);
+	bool operator&&(const Blob&);
 	bool operator==(const Blob&);
 
 private:
-	int radius;
+	int radius, boosts;
 	float xPos, yPos, velocity, angle;
 
 	void setVelocity();
