@@ -1,5 +1,4 @@
 #include "Blob.h"
-#include <iostream>
 #include <math.h>
 
 
