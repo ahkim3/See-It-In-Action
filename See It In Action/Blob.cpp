@@ -87,7 +87,7 @@ void Blob::operator+(Blob& other)
 
 
 // Determines if two blobs have collided and that the other blob is smaller or
-// the same size
+// the same size (collision occurs if half of two blobs overlap)
 bool Blob::operator&&(const Blob& other)
 {
 	if (((other.xPos >= xPos - (getRadius())) 
