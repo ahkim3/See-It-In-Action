@@ -51,22 +51,6 @@ int main()
     for (int i = 0; i < 40; i++)
         blobs.push_back(new Blob());
 
-    // Draw background
-    window.clear();
-    window.draw(interior);
-    window.draw(frameLeft);
-    window.draw(frameTop);
-    window.draw(frameRight);
-    window.draw(frameBottom);
-
-    // Draw 40 blobs
-    for (int i = 0; i < 40; i++)
-        window.draw(*blobs.at(i));
-
-    // Determine next step
-    for (int i = 0; i < 40; i++)
-        *blobs.at(i)>1;
-
     while (window.isOpen())
     {
         sf::Event event;
@@ -92,10 +76,22 @@ int main()
             window.draw(*blobs.at(i));
 
         // Determine next step
+        // First, loop through each blob
         for (int i = 0; i < 40; i++)
-            *blobs.at(i) > 1;
+        {
+            // Compare blob with every other blob to check for collision
+            for (int j = 0; j < 40; j++)
+            {
+                //if ()
+            }
+
+            // Compare blob with wall to check for collision
+            //if ()
 
 
+            // Step to next position normally
+            ++*blobs.at(i);
+        }
         window.display();
     }
 

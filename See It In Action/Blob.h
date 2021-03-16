@@ -9,13 +9,11 @@ public:
 
 	~Blob();
 
-	bool operator>(int);
+	Blob& operator++();
 	//void operator+(const Blob&);
 	//bool operator>(const Blob&);
 	//bool operator<(const Blob&);
-	//void operator==(const Blob&);
-
-	//void test();
+	bool operator==(const Blob&);
 
 private:
 	int radius;
