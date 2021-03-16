@@ -22,7 +22,7 @@ int main()
 {
     vector<Blob*> blobs;
 
-    srand(time(NULL));
+    srand((unsigned)time(NULL));
 
     sf::RenderWindow window(sf::VideoMode(600, 600), "See It In Action");
     
@@ -51,6 +51,22 @@ int main()
     for (int i = 0; i < 40; i++)
         blobs.push_back(new Blob());
 
+    // Draw background
+    window.clear();
+    window.draw(interior);
+    window.draw(frameLeft);
+    window.draw(frameTop);
+    window.draw(frameRight);
+    window.draw(frameBottom);
+
+    // Draw 40 blobs
+    for (int i = 0; i < 40; i++)
+        window.draw(*blobs.at(i));
+
+    // Determine next step
+    for (int i = 0; i < 40; i++)
+        *blobs.at(i)>1;
+
     while (window.isOpen())
     {
         sf::Event event;
@@ -62,21 +78,30 @@ int main()
                 window.close();
         }
 
-        window.clear();
 
         // Draw background
+        window.clear();
         window.draw(interior);
         window.draw(frameLeft);
         window.draw(frameTop);
         window.draw(frameRight);
         window.draw(frameBottom);
-        
-        // Display 40 blobs
+
+        // Draw 40 blobs
         for (int i = 0; i < 40; i++)
             window.draw(*blobs.at(i));
 
+        // Determine next step
+        for (int i = 0; i < 40; i++)
+            *blobs.at(i) > 1;
+
+
         window.display();
     }
+
+    // Delete blobs
+    for (int i = 0; i < 40; i++)
+        delete blobs.at(i);
 
     return 0;
 }

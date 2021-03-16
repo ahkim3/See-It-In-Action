@@ -9,6 +9,7 @@ public:
 
 	~Blob();
 
+	bool operator>(int);
 	//void operator+(const Blob&);
 	//bool operator>(const Blob&);
 	//bool operator<(const Blob&);
@@ -18,8 +19,7 @@ public:
 
 private:
 	int radius;
-	double velocity;
-	std::vector<float> position;
+	float xPos, yPos, velocity, angle;
 
 	void setVelocity();
 };
