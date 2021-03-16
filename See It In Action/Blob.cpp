@@ -69,7 +69,7 @@ void Blob::operator+(Blob& other)
 		other.velocity *= -1;
 	}
 	
-	setRadius(sqrt(pow(getRadius(), 2) + pow(other.getRadius(), 2)));
+	setRadius((float)sqrt(pow(getRadius(), 2) + pow(other.getRadius(), 2)));
 
 	// Corrects blobs that might go over border after increasing in size
 	if ((xPos > 550 - 2 * getRadius()))
